@@ -1,22 +1,27 @@
 import json
-from flask import Flask, request
-from flask.ext import restful
-from flask.ext.restful import reqparse, abort, Api, Resource
-
+from flask import Flask, request, jsonify
 
 app = Flask(__name__)
-api = restful.Api(app)
 
-class Login(restful.Resource):
-    def post(self):
-        json_data = request.get_json()
+@app.route('/login', methods=['POST'])
+def login():
+    json_data = request.get_json()
+    data = request.get_data()
 
-        f = open('log.txt', 'w')
-        f.write(json.dumps(json_data))
-        f.close()
-        return json_data
+    f = open('logs.txt', 'w')
+    f.write(data)
+    f.close()
+    return jsonify(json_data)
 
-api.add_resource(Login, '/login')
+@app.route('/search', methods=['POST'])
+def search():
+    json_data = request.get_json()
+    data = request.get_data()
+
+    f = open('search.txt', 'w')
+    f.write(data)
+    f.close()
+    return jsonify(json_data)
 
 if __name__ == '__main__':
     app.run(debug=True)
