@@ -15,13 +15,12 @@ def login():
 
 @app.route('/search', methods=['POST'])
 def search():
-    json_data = request.get_json()
-    data = request.get_data()
+    req = request.get_json()
 
     f = open('search.txt', 'w')
-    f.write(data)
+    f.write(str(req['query']))
     f.close()
-    return jsonify(json_data)
+    return jsonify(req)
 
 if __name__ == '__main__':
     app.run(debug=True)
