@@ -17,5 +17,5 @@
 
 ## 启动uwsgi
 ```
-uwsgi --ini uwsgiconfig.ini
+uwsgi --ini conf/uwsgiconfig.ini
 ```
